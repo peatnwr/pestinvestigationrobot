@@ -4,3 +4,12 @@ filelock==3.4.0
 platformdirs==2.4.0
 six==1.16.0
 virtualenv==20.10.0
+tensorflow==2.8.0
+keras==2.8.0
+numpy==1.22.3
+pillow==9.0.1
+scipy==1.8.0
+h5py==3.6.0
+matplotlib==3.3.2
+opencv-python
+keras-resnet==0.2.0
