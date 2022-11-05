@@ -62,4 +62,14 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Stop Robot"
+        android:textSize="18sp"
+        android:textAllCaps="true"
+        android:backgroundTint="#F90033"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
