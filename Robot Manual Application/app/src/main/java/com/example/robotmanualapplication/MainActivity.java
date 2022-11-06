@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton turnLeftBtn = findViewById(R.id.turnLeftBtn);
         FloatingActionButton turnRightBtn = findViewById(R.id.turnRightBtn);
         FloatingActionButton backwardBtn = findViewById(R.id.backwardBtn);
-        Button stopBtn = findViewById(R.id.stopBtn);
+        FloatingActionButton stopBtn = findViewById(R.id.stopBtn);
 
         forwardBtn.setOnClickListener(
                 view -> Log.e("forward Button", "Clicked")
