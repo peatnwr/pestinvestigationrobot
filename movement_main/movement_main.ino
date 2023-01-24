@@ -53,7 +53,11 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  if(ultrasonic() < 50){
+    Serial.print("Ultra sonic less than 50 cm.")
+  } else {
+    Serial.print("Ultra sonic more than 50 cm.")
+  }
 }
 
 void ultrasonic() {
