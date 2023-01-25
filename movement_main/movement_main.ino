@@ -116,6 +116,7 @@ void hallLeft() {
 }
 
 void hallRight() {
+  // https://kiranjoy.blog/2018/08/19/calculate-speed-using-hall-effect-sensor/#:~:text=The%20sensor%20and%20magnet%20will,of%20rotations%20in%20a%20minute. Calculate speed [Hall Sensor]
   int val = digitalRead(A1);
   return val;
 }
