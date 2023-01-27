@@ -12,13 +12,13 @@ TinyGPSPlus gps;
 int leftIn1 = 2;
 int leftIn2 = 3;
 int leftEn = 6;
-int leftHall = A0;
+int leftHall = 19;
 
 //RIGHT PINS
 int rightIn1 = 4;
 int rightIn2 = 5;
 int rightEn = 7;
-int rightHall = A1;
+int rightHall = 18;
 
 //ULTRA SONIC
 int echo = 12;
@@ -39,10 +39,12 @@ void setup() {
   pinMode(leftIn1, OUTPUT);
   pinMode(leftIn2, OUTPUT);
   pinMode(leftEn, OUTPUT);
+  pinMode(leftHall, INPUT);
 
   pinMode(rightIn1, OUTPUT);
   pinMode(rightIn2, OUTPUT);
   pinMode(rightEn, OUTPUT);
+  pinMode(rightHall, INPUT);
 
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
@@ -53,29 +55,42 @@ void setup() {
 }
 
 void loop() {
-  if(ultrasonic() < 50){
-    Serial.print("Ultra sonic less than 50 cm.")
+    Serial.print("Ultra sonic : ");
+    Serial.println(ultrasonic());
+    Serial.print("Right Hall Effect : ");
+    Serial.println(hallRight());
+    Serial.print("Left Hall Effect : ");
+    Serial.println(hallLeft());
+    Serial.println();
+    delay(400);
+  if(ultrasonic() < 50.00){
+    stopCom();
+    delay(5000);
+    backwardCom();
+    delay(3000);
+    turnRightCom();
+    delay(3000);
   } else {
-    Serial.print("Ultra sonic more than 50 cm.")
+    forwardCom();
   }
 }
 
-void ultrasonic() {
-  long duration;
+float ultrasonic() {
+  float duration;
 
   digitalWrite(trig, LOW);
-  delayMicroseconds(1);
+  delayMicroseconds(2);
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
 
   duration = pulseIn(echo, HIGH);
-  return duration * 0.034 / 2;
+  return duration / 29 / 2;
 }
 
 void forwardCom() {
-  analogWrite(leftEn, 255);
-  analogWrite(rightEn, 255);
+  analogWrite(leftEn, 210);
+  analogWrite(rightEn, 130);
   digitalWrite(leftIn1, HIGH);
   digitalWrite(leftIn2, LOW);
   digitalWrite(rightIn1, HIGH);
@@ -83,8 +98,8 @@ void forwardCom() {
 }
 
 void turnLeftCom() {
-  analogWrite(leftEn, 255);
-  analogWrite(rightEn, 255);
+  analogWrite(leftEn, 210);
+  analogWrite(rightEn, 130);
   digitalWrite(leftIn1, HIGH);
   digitalWrite(leftIn2, LOW);
   digitalWrite(rightIn1, LOW);
@@ -93,31 +108,40 @@ void turnLeftCom() {
 }
 
 void turnRightCom() {
-  analogWrite(leftEn, 255);
-  analogWrite(rightEn, 255);
+  analogWrite(leftEn, 210);
+  analogWrite(rightEn, 130);
   digitalWrite(leftIn1, LOW);
   digitalWrite(leftIn2, HIGH);
   digitalWrite(rightIn1, HIGH);
   digitalWrite(rightIn2, LOW);
 }
 
-void backwardCom () {
-  analogWrite(leftEn, 255);
-  analogWrite(rightEn, 255);
+void backwardCom() {
+  analogWrite(leftEn, 210);
+  analogWrite(rightEn, 130);
   digitalWrite(leftIn1, LOW);
   digitalWrite(leftIn2, HIGH);
   digitalWrite(rightIn1, LOW);
   digitalWrite(rightIn2, HIGH);
 }
 
-void hallLeft() {
-  int val = digitalRead(A0);
+void stopCom() {
+  analogWrite(leftEn, 0);
+  analogWrite(rightEn, 0);
+  digitalWrite(leftIn1, LOW);
+  digitalWrite(leftIn2, LOW);
+  digitalWrite(rightIn1, LOW);
+  digitalWrite(rightIn2, LOW);
+}
+
+int hallLeft() {
+  int val = digitalRead(leftHall);
   return val;
 }
 
-void hallRight() {
+int hallRight() {
   // https://kiranjoy.blog/2018/08/19/calculate-speed-using-hall-effect-sensor/#:~:text=The%20sensor%20and%20magnet%20will,of%20rotations%20in%20a%20minute. Calculate speed [Hall Sensor]
-  int val = digitalRead(A1);
+  int val = digitalRead(rightHall);
   return val;
 }
 
@@ -128,7 +152,7 @@ void comPass() {
 
   qmc.read(&x, &y, &z, &azimuth);
 
-  if (y > 2060 && x < -1200 && x > -1340) {
+  if (y > 2060 && x < -1140 && x > -1340) {
     Serial.println("N");
   }
   else if (y < 800 && y > 700 && x < 0 && x > -200) {
