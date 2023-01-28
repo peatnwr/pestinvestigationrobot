@@ -1,7 +1,7 @@
 //LIBRARY
 #include <Wire.h>
-#include <MechaQMC5883.h>
-#include <TinyGPS++.h>
+#include <MechaQMC5883.h> //https://kku.world/gtuns
+#include <TinyGPS++.h> //https://kku.world/4o8g3
 #include <SoftwareSerial.h>
 
 MechaQMC5883 qmc;
@@ -52,6 +52,10 @@ void setup() {
   //COMPASS SETUP
   Wire.begin();
   qmc.init();
+
+  //ATTACH AN INTERRUPT TO THE HALL SENSOR PIN
+  attachInterrupt(digitalPinToInterrupt(leftHall), hallInterrupt, RISING);
+  attachInterrupt(digitalPinToInterrupt(rightHall), hallInterrupt, RISING);
 }
 
 void loop() {
@@ -88,61 +92,26 @@ float ultrasonic() {
   return duration / 29 / 2;
 }
 
-void forwardCom() {
-  analogWrite(leftEn, 210);
-  analogWrite(rightEn, 130);
-  digitalWrite(leftIn1, HIGH);
-  digitalWrite(leftIn2, LOW);
-  digitalWrite(rightIn1, HIGH);
-  digitalWrite(rightIn2, LOW);
-}
-
-void turnLeftCom() {
-  analogWrite(leftEn, 210);
-  analogWrite(rightEn, 130);
-  digitalWrite(leftIn1, HIGH);
-  digitalWrite(leftIn2, LOW);
-  digitalWrite(rightIn1, LOW);
-  digitalWrite(rightIn2, HIGH);
-
-}
-
-void turnRightCom() {
-  analogWrite(leftEn, 210);
-  analogWrite(rightEn, 130);
-  digitalWrite(leftIn1, LOW);
-  digitalWrite(leftIn2, HIGH);
-  digitalWrite(rightIn1, HIGH);
-  digitalWrite(rightIn2, LOW);
-}
-
-void backwardCom() {
-  analogWrite(leftEn, 210);
-  analogWrite(rightEn, 130);
-  digitalWrite(leftIn1, LOW);
-  digitalWrite(leftIn2, HIGH);
-  digitalWrite(rightIn1, LOW);
-  digitalWrite(rightIn2, HIGH);
-}
-
-void stopCom() {
-  analogWrite(leftEn, 0);
-  analogWrite(rightEn, 0);
-  digitalWrite(leftIn1, LOW);
-  digitalWrite(leftIn2, LOW);
-  digitalWrite(rightIn1, LOW);
-  digitalWrite(rightIn2, LOW);
-}
-
-int hallLeft() {
-  int val = digitalRead(leftHall);
+float hallLeft() {
+  float val = analogRead(leftHall);
   return val;
 }
 
-int hallRight() {
-  // https://kiranjoy.blog/2018/08/19/calculate-speed-using-hall-effect-sensor/#:~:text=The%20sensor%20and%20magnet%20will,of%20rotations%20in%20a%20minute. Calculate speed [Hall Sensor]
-  int val = digitalRead(rightHall);
+float hallRight() {
+  float val = analogRead(rightHall);
   return val;
+}
+
+float hallLeftDegree() {
+  float val = hallLeft();
+  float degree = map(val, 0, 1023, 0, 360);
+  return degree;
+}
+
+float hallRightDegree() {
+  float val = hallRight();
+  float degree = map(val, 0, 1023, 0, 360);
+  return degree;
 }
 
 void comPass() {
