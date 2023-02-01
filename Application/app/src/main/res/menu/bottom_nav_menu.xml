@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/manualMenu"
+        android:title="Manual"
+        android:icon="@drawable/ic_baseline_back_hand_24" />
+
+    <item android:id="@+id/gpsMenu"
+        android:title="GPS Tracking"
+        android:icon="@drawable/ic_baseline_add_location_24" />
+</menu>
