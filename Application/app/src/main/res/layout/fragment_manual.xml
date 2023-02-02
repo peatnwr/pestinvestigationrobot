@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".Fragment.ManualFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pest Investigation Application"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual Function"
+        android:textSize="15sp"
+        android:layout_below="@id/tv1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forward"
+        android:textAllCaps="false"
+        android:layout_below="@id/tv2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn Left"
+        android:textAllCaps="false"
+        android:layout_below="@id/tv2"
+        android:layout_toRightOf="@id/btnFw"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn Right"
+        android:textAllCaps="false"
+        android:layout_below="@id/tv2"
+        android:layout_toRightOf="@id/btnTl"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Backward"
+        android:textAllCaps="false"
+        android:layout_below="@id/tv2"
+        android:layout_toRightOf="@id/btnTr"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>
