@@ -33,14 +33,14 @@ static const uint32_t GPSBaud = 9600;
 volatile int hallCounterLeft = 0;
 volatile int hallCounterRight = 0;
 
-unsigned long previousMillis = 0;
-const long interval = 1000;
-
 SoftwareSerial ss(gpsRxPin, gpsRxPin);
 
 void setup() {
   //SERIAL BEGIN SETTING
   Serial.begin(9600);
+
+  while(!Serial){}
+
   ss.begin(GPSBaud);
 
   //PINS SETUP
@@ -64,24 +64,8 @@ void setup() {
   //ATTACH AN INTERRUPT TO THE HALL SENSOR PIN
   attachInterrupt(digitalPinToInterrupt(leftHall), hallInterruptLeft, RISING);
   attachInterrupt(digitalPinToInterrupt(rightHall), hallInterruptRight, RISING);
-  
-  setTime(11, 59, 0, 1, 1, 20);
 }
 
 void loop() {
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval){
-    previousMillis = currentMillis;
-
-    int sec = (currentMillis / 1000) % 60;
-    int min = (currentMillis / (1000 * 60)) % 60;
-    int hour = (currentMillis / (1000 * 60 * 60)) % 24;
-
-    Serial.print(hour);
-    Serial.print(":");
-    Serial.print(min);
-    Serial.print(":");
-    Serial.print(sec);
-    Serial.println();
-  }
+  
 }
