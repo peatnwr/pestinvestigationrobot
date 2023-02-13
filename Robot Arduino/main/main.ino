@@ -3,6 +3,7 @@
 #include <MechaQMC5883.h> //https://kku.world/gtuns
 #include <TinyGPS++.h> //https://kku.world/4o8g3
 #include <SoftwareSerial.h>
+#include <TimeLib.h>
 
 MechaQMC5883 qmc;
 TinyGPSPlus gps;
@@ -32,6 +33,9 @@ static const uint32_t GPSBaud = 9600;
 volatile int hallCounterLeft = 0;
 volatile int hallCounterRight = 0;
 
+unsigned long previousMillis = 0;
+const long interval = 1000;
+
 SoftwareSerial ss(gpsRxPin, gpsRxPin);
 
 void setup() {
@@ -60,25 +64,24 @@ void setup() {
   //ATTACH AN INTERRUPT TO THE HALL SENSOR PIN
   attachInterrupt(digitalPinToInterrupt(leftHall), hallInterruptLeft, RISING);
   attachInterrupt(digitalPinToInterrupt(rightHall), hallInterruptRight, RISING);
+  
+  setTime(11, 59, 0, 1, 1, 20);
 }
 
 void loop() {
-    Serial.print("Ultra sonic : ");
-    Serial.println(ultrasonic());
-    Serial.print("Right Hall Effect : ");
-    Serial.println(hallRight());
-    Serial.print("Left Hall Effect : ");
-    Serial.println(hallLeft());
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval){
+    previousMillis = currentMillis;
+
+    int sec = (currentMillis / 1000) % 60;
+    int min = (currentMillis / (1000 * 60)) % 60;
+    int hour = (currentMillis / (1000 * 60 * 60)) % 24;
+
+    Serial.print(hour);
+    Serial.print(":");
+    Serial.print(min);
+    Serial.print(":");
+    Serial.print(sec);
     Serial.println();
-    delay(400);
-  if(ultrasonic() < 50.00){
-    stopCom();
-    delay(5000);
-    backwardCom();
-    delay(3000);
-    turnRightCom();
-    delay(3000);
-  } else {
-    forwardCom();
   }
 }

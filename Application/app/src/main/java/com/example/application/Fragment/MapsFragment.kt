@@ -9,26 +9,17 @@ import android.view.ViewGroup
 import com.example.application.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
 
-    private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -36,12 +27,25 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+
+        val rootView = inflater.inflate(R.layout.fragment_maps, container, false)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment?
+        mapFragment!!.getMapAsync { mMap ->
+            mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+            mMap.clear()
+
+            val googlePlex = CameraPosition.builder()
+                .target(LatLng(16.47513861302529, 102.82494333281568))
+                .zoom(10f)
+                .bearing(0f)
+                .tilt(45f)
+                .build()
+
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null)
+        }
+
+        return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
-    }
 }
