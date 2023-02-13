@@ -3,7 +3,6 @@
 #include <MechaQMC5883.h> //https://kku.world/gtuns
 #include <TinyGPS++.h> //https://kku.world/4o8g3
 #include <SoftwareSerial.h>
-#include <TimeLib.h>
 
 MechaQMC5883 qmc;
 TinyGPSPlus gps;
