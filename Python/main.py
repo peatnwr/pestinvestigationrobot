@@ -13,7 +13,7 @@ def thread_callback():
             time.sleep(1)
             print("Send data to Arduino")
             ser.write("f\n".encode('utf-8'))
-    except:
+    except KeyboardInterrupt:
         print("Close Serial Communication")
         ser.close
 
