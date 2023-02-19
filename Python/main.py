@@ -13,9 +13,14 @@ class myThread(threading.Thread):
         self.val = val
 
     def run(self):
-        global command
-        command = self.val
-        ser.write(command+"\n".encode('utf-8'))
+        try:
+            while True:
+                global command
+                command = self.val
+                ser.write(command+"\n".encode('utf-8'))
+        except KeyboardInterrupt:
+            print("Close Serial Commmunication")
+            ser.close()
 
 thr1 = myThread("f")
 
