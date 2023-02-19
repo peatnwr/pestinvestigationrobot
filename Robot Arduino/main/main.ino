@@ -69,7 +69,7 @@ void loop() {
   if(Serial.available() > 0){
     String val = Serial.readStringUntil('\n');
     if(val == "f"){
-      Serial.println("Value is correct!.");
+      Serial.println("f is complete");
     }
   }
 }
