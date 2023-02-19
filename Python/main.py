@@ -15,7 +15,7 @@ def thread_callback():
             ser.write("f\n".encode('utf-8'))
     except KeyboardInterrupt:
         print("Close Serial Communication")
-        ser.close
+        ser.close()
         return True
 
 
