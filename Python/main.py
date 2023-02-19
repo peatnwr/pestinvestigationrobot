@@ -7,17 +7,17 @@ time.sleep(3)
 ser.reset_input_buffer()
 print("Serial OK")
 
-class myThread(threading.Thread):
-    def __init__(self, val):
-        threading.Thread.__init__(self)
-        self.val = val
+def thread_callback():
+    try:
+        while True:
+            print("Send data to Arduino")
+            ser.write("f\n".encode('utf-8'))
+    except KeyboardInterrupt:
+        print("Close Serial Communication")
+        ser.close
 
-    def run(self):
-        global command
-        command = self.val
-        ser.write("Hello from Thread in Raspberry pi".encode('utf-8'))
-        ser.close()
 
-thr1 = myThread("f")
+thr = threading.Thread(target=thread_callback)
 
-thr1.start()
+thr.start()
+thr.join()
