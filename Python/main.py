@@ -23,11 +23,19 @@ def thread_sec():
     while True:
         time.sleep(1)
         print("Send data to Arduino from Thread-2")
+        while ser.in_waiting <= 0:
+            time.sleep(0.01)
+        res = ser.readline().decode('utf-8').rstrip()
+        print(res)
 
 
 thr = threading.Thread(target=thread_callback)
+thr1 = threading.Thread(target=thread_sec)
 
 thr.start()
+thr1.start()
+
 thr.join()
+thr1.join()
 
 ser.close()
