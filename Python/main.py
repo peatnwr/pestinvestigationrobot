@@ -15,8 +15,7 @@ class myThread(threading.Thread):
     def run(self):
         global command
         command = self.val
-        value = ser.write(command+"\n".encode('utf-8'))
-        print(value)
+        ser.write(command+"\n".encode('utf-8'))
 
 thr1 = myThread("f")
 
