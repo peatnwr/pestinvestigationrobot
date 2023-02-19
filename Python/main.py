@@ -16,6 +16,7 @@ def thread_callback():
             time.sleep(0.01)
         res = ser.readline().decode('utf-8').rstrip()
         if(res == "f is complete"):
+            print(res)
             break
     
 def thread_sec():
