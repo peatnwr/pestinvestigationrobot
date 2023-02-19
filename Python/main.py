@@ -16,6 +16,7 @@ def thread_callback():
     except KeyboardInterrupt:
         print("Close Serial Communication")
         ser.close
+        return True
 
 
 thr = threading.Thread(target=thread_callback)
