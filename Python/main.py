@@ -17,7 +17,7 @@ class myThread(threading.Thread):
             while True:
                 global command
                 command = self.val
-                ser.write(command+"\n".encode('utf-8'))
+                ser.write(str(command+"\n").encode('utf-8'))
         except KeyboardInterrupt:
             print("Close Serial Commmunication")
             ser.close()
