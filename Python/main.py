@@ -15,7 +15,8 @@ def thread_callback():
         while ser.in_waiting <= 0:
             time.sleep(0.01)
         res = ser.readline().decode('utf-8').rstrip()
-        print(res)
+        if(res == "f is complete"):
+            break
     
 def thread_sec():
     while True:
