@@ -10,6 +10,7 @@ print("Serial OK")
 def thread_callback():
     try:
         while True:
+            time.sleep(1)
             print("Send data to Arduino")
             ser.write("f\n".encode('utf-8'))
     except KeyboardInterrupt:
