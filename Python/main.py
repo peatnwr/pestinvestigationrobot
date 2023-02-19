@@ -15,7 +15,7 @@ class myThread(threading.Thread):
     def run(self):
         global command
         command = self.val
-        ser.write(command+"\n".encode('utf-8'))
+        ser.write("Hello from Thread in Raspberry pi".encode('utf-8'))
         ser.close()
 
 thr1 = myThread("f")
