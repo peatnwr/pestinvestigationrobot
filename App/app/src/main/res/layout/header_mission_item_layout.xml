@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date : 20/2/2000"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time : 10.23"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/txtDate"
+        android:layout_marginLeft="5dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnViewCoord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Coord"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/button_style_view_coord"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
