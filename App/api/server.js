@@ -15,13 +15,33 @@ let dbConn = mysql.createConnection({
     database: 'pestinves'
 });
 
-dbConn.connect();
+dbConn.connect((err) => {
+    if(err){
+        console.error('Error connecting to the database:', err);
+    } else {
+        console.log('Connected to the database')
+    }
+});
 
-app.get('/alldata', function(req, res){
-    dbConn.query('SELECT * FROM `data`', function(error, results, fields){
-        if(error) throw error;
+app.post('/addmission/', function(req, res) {
+    let body = req.body;
+    let missionName = body.missionName;
+    let date = body.date;
+
+    dbConn.query('INSERT INTO `date`(`missionName`, `datetime`) VALUES (?, ?)', [missionName, date], function(error, results, fields) {
+        dbConn.on('error', function(error) {
+            console.log("เกิด Error ไอสัส", error)
+        })
         return res.send(results);
-    })
+    });
+});
+
+app.get('/allmission/', function(req, res) {
+    dbConn.query('SELECT * FROM `date`', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    });
 });
 
 app.listen(3000, function() {
