@@ -1,36 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/txtMissionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mission Name : "
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date : 20/2/2000"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textColor="@color/white"
-        android:layout_centerVertical="true"/>
+        android:layout_below="@id/txtMissionName"/>
 
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time : 10.23"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textColor="@color/white"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/txtMissionName"
         android:layout_toRightOf="@id/txtDate"
         android:layout_marginLeft="5dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnViewCoord"
+        android:id="@+id/btnEditMission"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Coord"
+        android:text="Edit Mission"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/button_style_view_coord"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"/>
 
 </RelativeLayout>
