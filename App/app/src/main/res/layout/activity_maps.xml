@@ -44,7 +44,8 @@
         android:background="@drawable/button_style_add_coord"
         android:layout_alignParentRight="true"
         android:layout_above="@id/btnZoomOut"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnZoomOut"
@@ -54,5 +55,6 @@
         android:background="@drawable/button_style_add_coord"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"/>
 </RelativeLayout>

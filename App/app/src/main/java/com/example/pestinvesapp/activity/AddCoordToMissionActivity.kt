@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pestinvesapp.R
 import com.example.pestinvesapp.adapter.CoordAdapter
 import com.example.pestinvesapp.databinding.ActivityAddCoordToMissionBinding
@@ -29,7 +31,11 @@ class AddCoordToMissionActivity : AppCompatActivity() {
         binding = ActivityAddCoordToMissionBinding.inflate(layoutInflater)
 
         binding.rcvCoord.adapter = CoordAdapter(this.coordList, this@AddCoordToMissionActivity)
-        binding.rcvCoord.layoutManager
+        binding.rcvCoord.layoutManager = LinearLayoutManager(applicationContext)
+        binding.rcvCoord.addItemDecoration(
+            DividerItemDecoration(binding.rcvCoord.getContext(),
+                DividerItemDecoration.VERTICAL)
+        )
 
         binding.btnPreviousPageAddCoordToMissionPage.setOnClickListener {
             super.onBackPressed()
@@ -48,6 +54,31 @@ class AddCoordToMissionActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getMissionData()
+        getCoordData()
+    }
+
+    private fun getCoordData() {
+        coordList.clear()
+        val data = intent.extras
+        val idMission = data?.get("missionId")
+        val api: PestInvesAPI = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PestInvesAPI::class.java)
+        api.receiveAllCoord(
+            idMission.toString()
+        ).enqueue(object : Callback<List<Coord>> {
+            override fun onResponse(call: Call<List<Coord>>, response: Response<List<Coord>>) {
+                response.body()?.forEach {
+                    coordList.add(Coord(it.idCoord, it.lat, it.longi, it.idMissionAtCoordTable))
+                }
+                binding.rcvCoord.adapter = CoordAdapter(coordList, applicationContext)
+            }
+
+            override fun onFailure(call: Call<List<Coord>>, t: Throwable) {}
+
+        })
     }
 
     private fun getMissionData() {

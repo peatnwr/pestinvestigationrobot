@@ -20,7 +20,10 @@ class CoordAdapter(val coordList: ArrayList<Coord>, val context: Context):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val binding = holder.binding
 
+        binding.txtLat.text = "Lat: " + coordList!![position].lat.toString()
+        binding.txtLongi.text = "Longi: " + coordList!![position].longi.toString()
     }
 
     override fun getItemCount(): Int {
