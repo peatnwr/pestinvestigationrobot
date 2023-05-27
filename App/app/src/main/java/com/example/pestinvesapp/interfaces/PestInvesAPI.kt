@@ -32,4 +32,9 @@ interface PestInvesAPI {
         @Field("lat") lat: Double,
         @Field("longi") longi: Double
     ): Call<Coord>
+
+    @GET("/allcoord/{idMission}")
+    fun receiveAllCoord(
+        @Path("idMission") idMission: String
+    ): Call<List<Coord>>
 }

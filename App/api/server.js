@@ -49,6 +49,16 @@ app.post('/addcoord/', function(req, res) {
     })
 });
 
+app.get('/allcoord/:idMission', function(req, res) {
+    let missionId = req.params.idMission
+
+    dbConn.query('SELECT * FROM `coord` WHERE `idMission` = ?', missionId, function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    });
+});
+
 app.get('/allmission/', function(req, res) {
     dbConn.query('SELECT * FROM `mission`', function(error, results, fields) {
         if(error) throw error;
