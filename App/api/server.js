@@ -28,7 +28,7 @@ app.post('/addmission/', function(req, res) {
     let missionName = body.missionName;
     let date = body.date;
 
-    dbConn.query('INSERT INTO `date`(`missionName`, `datetime`) VALUES (?, ?)', [missionName, date], function(error, results, fields) {
+    dbConn.query('INSERT INTO `mission`(`missionName`, `datetime`) VALUES (?, ?)', [missionName, date], function(error, results, fields) {
         dbConn.on('error', function(error) {
             console.log("เกิด Error ไอสัส", error)
         })
@@ -36,12 +36,35 @@ app.post('/addmission/', function(req, res) {
     });
 });
 
+app.post('/addcoord/', function(req, res) {
+    let body = req.body;
+    let lat = body.lat;
+    let longi = body.longi;
+    let missionId = body.idMission;
+
+    dbConn.query('INSERT INTO `coord`(`lat`, `longi`, `idMission`) VALUES (?, ?, ?)', [lat, longi, missionId], function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results)
+    })
+});
+
 app.get('/allmission/', function(req, res) {
-    dbConn.query('SELECT * FROM `date`', function(error, results, fields) {
+    dbConn.query('SELECT * FROM `mission`', function(error, results, fields) {
         if(error) throw error;
 
         return res.send(results);
     });
+});
+
+app.get('/missioninfo/:idMission', function(req, res) {
+    let missionId = req.params.idMission
+
+    dbConn.query('SELECT * FROM `mission` WHERE `id` = ?', missionId, function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
 });
 
 app.listen(3000, function() {
