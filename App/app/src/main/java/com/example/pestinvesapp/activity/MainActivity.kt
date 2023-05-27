@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             .enqueue(object : Callback<List<Mission>> {
                 override fun onResponse(call: Call<List<Mission>>, response: Response<List<Mission>>) {
                     response.body()?.forEach {
-                        missionList.add(Mission(it.idDate, it.missionName, it.datetime))
+                        missionList.add(Mission(it.idMission, it.missionName, it.datetime))
                     }
                     binding.rcvMission.adapter = MissionAdapter(missionList, applicationContext)
                 }
