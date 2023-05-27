@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#217074"
+    tools:context=".activity.AddCoordToMissionActivity">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnPreviousPageAddCoordToMissionPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/txtMissionId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: 100"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/txtMissionNameAddCoordPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mission Name: First Mission"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_below="@id/btnPreviousPageAddCoordToMissionPage"/>
+
+    <TextView
+        android:id="@+id/txtDateAddCoordPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: 2023-05-10"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_below="@id/txtMissionNameAddCoordPage"/>
+
+    <TextView
+        android:id="@+id/txtTimeAddCoordPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time: 10:00:00"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/txtMissionNameAddCoordPage"
+        android:layout_toRightOf="@id/txtDateAddCoordPage"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCoord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtDateAddCoordPage"
+        tools:listitem="@layout/coord_item_layout"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnAddCoordToMission"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/baseline_add_location_24"
+        android:layout_below="@id/rcvCoord"
+        android:background="@drawable/button_style_add_coord"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

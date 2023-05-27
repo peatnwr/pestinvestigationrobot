@@ -1,23 +1,30 @@
 package com.example.pestinvesapp.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pestinvesapp.activity.AddCoordToMissionActivity
 import com.example.pestinvesapp.databinding.HeaderMissionItemLayoutBinding
 import com.example.pestinvesapp.dataclass.Mission
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MissionAdapter(val missionList: ArrayList<Mission>?, val context: Context):
+class MissionAdapter(val missionList: ArrayList<Mission>, val context: Context):
     RecyclerView.Adapter<MissionAdapter.ViewHolder>() {
-    class ViewHolder(view: View, val binding: HeaderMissionItemLayoutBinding):
+    inner class ViewHolder(view: View, val binding: HeaderMissionItemLayoutBinding):
         RecyclerView.ViewHolder(view) {
             init {
                 binding.btnEditMission.setOnClickListener {
-
+                    val item = missionList[adapterPosition]
+                    val contextView: Context = view.context
+                    val addCoordToMissionPage = Intent(contextView, AddCoordToMissionActivity::class.java)
+                    addCoordToMissionPage.putExtra("missionId", item.idMission.toString())
+                    contextView.startActivity(addCoordToMissionPage)
                 }
             }
         }
@@ -44,8 +51,11 @@ class MissionAdapter(val missionList: ArrayList<Mission>?, val context: Context)
 
     private fun reFormatDateTime(dateTimeString: String): Pair<String, String> {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+
         val outputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputTimeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        outputTimeFormat.timeZone = TimeZone.getTimeZone("Asia/Bangkok")
 
         val date: Date = inputFormat.parse(dateTimeString)
 

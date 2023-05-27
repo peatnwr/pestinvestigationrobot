@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Mission (
     @Expose
-    @SerializedName("id") val idDate: Int,
+    @SerializedName("id") val idMission: Int,
 
     @Expose
     @SerializedName("missionName") val missionName: String,
