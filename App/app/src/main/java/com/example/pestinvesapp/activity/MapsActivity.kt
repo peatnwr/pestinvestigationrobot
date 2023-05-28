@@ -146,9 +146,32 @@ class MapsActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
+            val data = intent.extras
+            val idMission = data?.get("missionId")
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("Lat", currentPoint?.latitude.toString())
-                Log.d("Longi", currentPoint?.longitude.toString())
+                val api: PestInvesAPI = Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:3000/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(PestInvesAPI::class.java)
+                api.addCoordToMission(
+                    idMission.toString(),
+                    currentPoint?.latitude.toString().toDouble(),
+                    currentPoint?.longitude.toString().toDouble()
+                ).enqueue(object : Callback<Coord> {
+                    override fun onResponse(call: Call<Coord>, response: Response<Coord>) {
+                        if(response.isSuccessful){
+                            finish()
+                        } else {
+                            Log.e("MapsActivity.kt Alert: ", "เกิด error ผลลัพธ์ไม่เสร็จสมบูรณ์ไอสัส")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Coord>, t: Throwable) {
+                        Log.e("MapsActivity.kt Alert: ", "เกิด error อะไรสักอย่างไอ้สัส")
+                    }
+
+                })
             } else {
                 Toast.makeText(this@MapsActivity, "Location access is not allowed.", Toast.LENGTH_LONG).show()
             }
