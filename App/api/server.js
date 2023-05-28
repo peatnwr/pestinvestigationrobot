@@ -49,10 +49,23 @@ app.post('/addcoord/', function(req, res) {
     })
 });
 
+app.post('/updatecoord/', function(req, res) {
+    let body = req.body;
+    let coordId = body.coordId;
+    let lat = body.lat;
+    let longi = body.longi;
+
+    dbConn.query('UPDATE `coord` SET `lat` = ?, `longi` = ? WHERE `id` = ?', [lat, longi, coordId], function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results)
+    });
+});
+
 app.get('/allcoord/:idMission', function(req, res) {
     let missionId = req.params.idMission
 
-    dbConn.query('SELECT * FROM `coord` WHERE `idMission` = ?', missionId, function(error, results, fields) {
+    dbConn.query('SELECT * FROM `coord` WHERE `idMission` = ? ORDER BY `id` ASC', missionId, function(error, results, fields) {
         if(error) throw error;
 
         return res.send(results);

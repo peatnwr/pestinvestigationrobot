@@ -37,4 +37,12 @@ interface PestInvesAPI {
     fun receiveAllCoord(
         @Path("idMission") idMission: String
     ): Call<List<Coord>>
+
+    @POST("updatecoord")
+    @FormUrlEncoded
+    fun updateCoord(
+        @Field("coordId") idCoord: Int,
+        @Field("lat") lat: Double,
+        @Field("longi") longi: Double
+    ): Call<Coord>
 }
