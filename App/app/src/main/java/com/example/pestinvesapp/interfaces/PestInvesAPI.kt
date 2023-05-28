@@ -3,6 +3,7 @@ package com.example.pestinvesapp.interfaces
 import com.example.pestinvesapp.dataclass.Coord
 import com.example.pestinvesapp.dataclass.Mission
 import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -44,5 +45,10 @@ interface PestInvesAPI {
         @Field("coordId") idCoord: Int,
         @Field("lat") lat: Double,
         @Field("longi") longi: Double
+    ): Call<Coord>
+
+    @DELETE("/deletecoord/{coordId}")
+    fun deleteCoord(
+        @Path("coordId") idCoord: Int
     ): Call<Coord>
 }
