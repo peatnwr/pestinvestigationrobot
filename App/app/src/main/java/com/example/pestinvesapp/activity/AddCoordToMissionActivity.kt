@@ -62,7 +62,7 @@ class AddCoordToMissionActivity : AppCompatActivity() {
         val data = intent.extras
         val idMission = data?.get("missionId")
         val api: PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/")
+            .baseUrl("http://192.168.1.30:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PestInvesAPI::class.java)
@@ -86,7 +86,7 @@ class AddCoordToMissionActivity : AppCompatActivity() {
         val idMission = data?.get("missionId")
         Log.d("missionId", idMission.toString())
         val api: PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/")
+            .baseUrl("http://192.168.1.30:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PestInvesAPI::class.java)

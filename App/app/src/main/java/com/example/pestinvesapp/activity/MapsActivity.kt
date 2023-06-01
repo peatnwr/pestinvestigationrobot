@@ -50,7 +50,7 @@ class MapsActivity : AppCompatActivity() {
             if (currentPoint != null) {
                 if (hasLocationPermission()) {
                     val api: PestInvesAPI = Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:3000/")
+                        .baseUrl("http://192.168.1.30:3000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                         .create(PestInvesAPI::class.java)
@@ -150,7 +150,7 @@ class MapsActivity : AppCompatActivity() {
             val idMission = data?.get("missionId")
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val api: PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:3000/")
+                    .baseUrl("http://192.168.1.30:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(PestInvesAPI::class.java)
