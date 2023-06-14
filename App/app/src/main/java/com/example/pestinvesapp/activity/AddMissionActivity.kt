@@ -42,7 +42,7 @@ class AddMissionActivity : AppCompatActivity() {
 
         binding.btnSaveMission.setOnClickListener {
             val api: PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.1.30:3000/")
+                .baseUrl("http://192.168.43.89:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
