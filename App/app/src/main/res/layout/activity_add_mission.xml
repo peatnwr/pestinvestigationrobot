@@ -51,7 +51,8 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:background="@drawable/edittext_style"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
