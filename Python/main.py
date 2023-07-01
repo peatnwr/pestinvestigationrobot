@@ -172,7 +172,7 @@ def turnLeftOrRight(degreeNow, degreeToGo):
                                 modulo=degreeSize)))
         
         left = len(list(crange(start=degreeToGo,
-                               step=degreeNow,
+                               stop=degreeNow,
                                modulo=degreeSize)))
         
         select = ""
