@@ -54,9 +54,6 @@ interface PestInvesAPI {
         @Path("coordId") idCoord: Int
     ): Call<Coord>
 
-    @GET("/allstatus/")
-    fun receiveAllStatus(): Call<List<Status>>
-
     @PUT("/automaticmode/")
     fun changeToAutomatic(): Call<Status>
 
