@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import com.example.pestinvesapp.R
 import com.example.pestinvesapp.adapter.MissionAdapter
 import com.example.pestinvesapp.databinding.ActivityMainBinding
 import com.example.pestinvesapp.dataclass.Mission
+import com.example.pestinvesapp.dataclass.Status
 import com.example.pestinvesapp.interfaces.PestInvesAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,10 +52,47 @@ class MainActivity : AppCompatActivity() {
         getDateData()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+
+        val automaticMenu = menu?.findItem(R.id.automaticMode)
+        automaticMenu?.isVisible = false
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item?.itemId) {
+            R.id.manualMode -> {
+                val api : PestInvesAPI = Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:3000/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(PestInvesAPI::class.java)
+                api.changeToManual()
+                    .enqueue(object : Callback<Status> {
+                        override fun onResponse(call: Call<Status>, response: Response<Status>) {
+                            if(response.isSuccessful){
+                                val manualPage = Intent(this@MainActivity, ManualActivity::class.java)
+                                startActivity(manualPage)
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Status>, t: Throwable) {
+                            Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun getDateData() {
         missionList.clear()
         val api : PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://192.168.43.89:3000/")
+            .baseUrl("http://10.0.2.2:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(PestInvesAPI::class.java)

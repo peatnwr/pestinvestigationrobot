@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#217074"
+    android:orientation="vertical"
+    tools:context=".activity.ManualActivity">
+
+    <TextView
+        android:id="@+id/manualText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual Mode"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/idLinear1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/manualText">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnForward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forward"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBackward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Backward"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTurnright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn Right"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTurnleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn Left"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/idLinear2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/manualText"
+        android:layout_toRightOf="@id/idLinear1">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSforward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Forward"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSbackward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Backward"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSturnright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Turnright"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSturnleft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Turnleft"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -62,7 +62,7 @@ class UpdateCoordActivity : AppCompatActivity() {
             if(currentPoint != null) {
                 if(hasLocationPermission()) {
                     val api: PestInvesAPI = Retrofit.Builder()
-                        .baseUrl("http://192.168.43.89:3000/")
+                        .baseUrl("http://10.0.2.2:3000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                         .create(PestInvesAPI::class.java)
@@ -158,7 +158,7 @@ class UpdateCoordActivity : AppCompatActivity() {
                 val data = intent.extras
                 val coordId = data?.get("coordId")
                 val api: PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://192.168.43.89:3000/")
+                    .baseUrl("http://10.0.2.2:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(PestInvesAPI::class.java)

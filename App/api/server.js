@@ -100,6 +100,86 @@ app.get('/missioninfo/:idMission', function(req, res) {
     })
 });
 
+app.put('/automaticmode/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `mode` = 1, `forWard` = 0, `backWard` = 0, `turnLeft` = 0, `turnRight` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/manualmode/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `mode` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/enableforward/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `forWard` = 1', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/enablebackward/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `backWard` = 1', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/enableturnleft', function(req, res) {
+    dbConn.query('UPDATE `status` SET `turnLeft` = 1', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/enableturnright/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `turnRight` = 1', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/disableforward/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `forWard` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/disablebackward/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `backWard` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/disableturnleft/', function(req, res) {
+    dbConn.query('UPDATE `status` SET `turnLeft` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
+app.put('/disableturnright', function(req, res) {
+    dbConn.query('UPDATE `status` SET `turnRight` = 0', function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    })
+});
+
 app.listen(3000, function() {
     console.log('Node app or API is running on port 3000');
 });
