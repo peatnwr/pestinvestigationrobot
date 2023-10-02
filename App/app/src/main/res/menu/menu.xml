@@ -6,12 +6,14 @@
         android:id="@+id/manualMode"
         android:title="Manual Mode"
         android:icon="@drawable/baseline_front_hand_24"
+        android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/automaticMode"
         android:title="Automatic Mode"
         android:icon="@drawable/baseline_hdr_auto_24"
+        android:iconTint="@color/white"
         app:showAsAction="always" />
 
 </menu>

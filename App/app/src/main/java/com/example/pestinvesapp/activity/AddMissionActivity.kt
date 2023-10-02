@@ -54,7 +54,7 @@ class AddMissionActivity : AppCompatActivity() {
                     call: Call<Mission>,
                     response: Response<Mission>
                 ) {
-                    if(response.isSuccessful()){
+                    if(response.isSuccessful){
                         Toast.makeText(applicationContext, "Add Mission Successfully", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@AddMissionActivity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
                         finish()
@@ -63,7 +63,7 @@ class AddMissionActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<Mission>, t: Throwable) {
                     Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    Log.e("Some error", t.message.toString())
+                    Log.e("Some error", "${binding.btnSelectDate.text} ${binding.btnSelectTime.text}")
                 }
 
             })
