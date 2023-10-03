@@ -54,6 +54,11 @@ interface PestInvesAPI {
         @Path("coordId") idCoord: Int
     ): Call<Coord>
 
+    @DELETE("/deletemission/{missionId}")
+    fun deleteMission(
+        @Path("missionId") idMission: Int
+    ): Call<Mission>
+
     @PUT("/automaticmode/")
     fun changeToAutomatic(): Call<Status>
 
