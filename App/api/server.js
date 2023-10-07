@@ -72,6 +72,16 @@ app.delete('/deletecoord/:coordId', function(req, res) {
     });
 });
 
+app.delete('/deletemission/:missionId', function(req, res) {
+    let missionId = req.params.missionId;
+
+    dbConn.query('DELETE FROM `mission` WHERE `id` = ?', missionId, function(error, results, fields) {
+        if(error) throw error;
+
+        return res.send(results);
+    });
+});
+
 app.get('/allcoord/:idMission', function(req, res) {
     let missionId = req.params.idMission
 

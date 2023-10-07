@@ -16,4 +16,11 @@
         android:iconTint="@color/white"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/stramingMode"
+        android:title="Streaming Mode"
+        android:icon="@drawable/baseline_personal_video_24"
+        android:iconTint="@color/white"
+        app:showAsAction="always" />
+
 </menu>
