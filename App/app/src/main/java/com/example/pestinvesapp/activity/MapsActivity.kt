@@ -44,9 +44,6 @@ class MapsActivity : AppCompatActivity() {
 
         binding.btnZoomOut.setOnClickListener { binding.mapView.controller.zoomOut() }
 
-        binding.edtLat.setText(currentPoint?.latitude.toString())
-        binding.edtLong.setText(currentPoint?.longitude.toString())
-
         binding.btnSaveCoord.setOnClickListener {
             val data = intent.extras
             val idMission = data?.get("missionId")
@@ -59,8 +56,8 @@ class MapsActivity : AppCompatActivity() {
                         .create(PestInvesAPI::class.java)
                     api.addCoordToMission(
                         idMission.toString(),
-                        binding.edtLat.text.toString().toDouble(),
-                        binding.edtLong.text.toString().toDouble()
+                        currentPoint?.latitude.toString().toDouble(),
+                        currentPoint?.longitude.toString().toDouble()
                     ).enqueue(object : Callback<Coord> {
                         override fun onResponse(call: Call<Coord>, response: Response<Coord>) {
                             if(response.isSuccessful){
