@@ -40,7 +40,7 @@ class MissionAdapter(val missionList: ArrayList<Mission>, val context: Context):
                     val item = missionList[adapterPosition]
                     val contextView: Context = view.context
                     val api : PestInvesAPI = Retrofit.Builder()
-                        .baseUrl("http://192.168.43.89:3000/")
+                        .baseUrl("http://192.168.43.187:3000/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                         .create(PestInvesAPI::class.java)

@@ -28,7 +28,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnForward.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -54,7 +54,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnSforward.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -82,7 +82,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnBackward.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -106,7 +106,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnSbackward.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -132,7 +132,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnTurnleft.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -156,7 +156,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnSturnleft.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -182,7 +182,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnTurnright.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -206,7 +206,7 @@ class ManualActivity : AppCompatActivity() {
 
         binding.btnSturnright.setOnClickListener {
             val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.89:3000/")
+                .baseUrl("http://192.168.43.187:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(PestInvesAPI::class.java)
@@ -247,7 +247,7 @@ class ManualActivity : AppCompatActivity() {
         when(item?.itemId) {
             R.id.automaticMode -> {
                 val api: PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://192.168.43.89:3000/")
+                    .baseUrl("http://192.168.43.187:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(PestInvesAPI::class.java)
