@@ -23,6 +23,7 @@ import java.util.*
 class AddCoordToMissionActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddCoordToMissionBinding
+    val createClient = PestInvesAPI.createClient()
     var coordList = arrayListOf<Coord>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +62,7 @@ class AddCoordToMissionActivity : AppCompatActivity() {
         coordList.clear()
         val data = intent.extras
         val idMission = data?.get("missionId")
-        val api: PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://192.168.43.187:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(PestInvesAPI::class.java)
-        api.receiveAllCoord(
+        createClient.receiveAllCoord(
             idMission.toString()
         ).enqueue(object : Callback<List<Coord>> {
             override fun onResponse(call: Call<List<Coord>>, response: Response<List<Coord>>) {
@@ -85,12 +81,7 @@ class AddCoordToMissionActivity : AppCompatActivity() {
         val data = intent.extras
         val idMission = data?.get("missionId")
         Log.d("missionId", idMission.toString())
-        val api: PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://192.168.43.187:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(PestInvesAPI::class.java)
-        api.getMissionInfo(
+        createClient.getMissionInfo(
             idMission.toString()
         ).enqueue(object : Callback<List<Mission>> {
             override fun onResponse(call: Call<List<Mission>>, response: Response<List<Mission>>) {

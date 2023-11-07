@@ -19,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AddMissionActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddMissionBinding
+    val createClient = PestInvesAPI.createClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +42,7 @@ class AddMissionActivity : AppCompatActivity() {
         }
 
         binding.btnSaveMission.setOnClickListener {
-            val api: PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.addMission(
+            createClient.addMission(
                 binding.edtMissionName.text.toString(),
                 "${binding.btnSelectDate.text} ${binding.btnSelectTime.text}"
             ).enqueue(object : Callback<Mission>{

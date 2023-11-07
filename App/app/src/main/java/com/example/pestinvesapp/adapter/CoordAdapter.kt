@@ -39,16 +39,12 @@ class CoordAdapter(val coordList: ArrayList<Coord>, val context: Context):
                     val item = coordList[adapterPosition]
                     val contextView: Context = view.context
                     val alertDialog = AlertDialog.Builder(contextView)
+                    val createClient = PestInvesAPI.createClient()
                     with(alertDialog){
                         setTitle("Are you sure?")
                         setPositiveButton("No") { dialog, which -> }
                         setNegativeButton("Yes") { dialog, which ->
-                            val api: PestInvesAPI = Retrofit.Builder()
-                                .baseUrl("http://192.168.43.187:3000/")
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build()
-                                .create(PestInvesAPI::class.java)
-                            api.deleteCoord(
+                            createClient.deleteCoord(
                                 item.idCoord
                             ).enqueue(object : Callback<Coord> {
                                 override fun onResponse(call: Call<Coord>, response: Response<Coord>) {

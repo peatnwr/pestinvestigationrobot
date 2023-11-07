@@ -4,6 +4,8 @@ import com.example.pestinvesapp.dataclass.Coord
 import com.example.pestinvesapp.dataclass.Mission
 import com.example.pestinvesapp.dataclass.Status
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -88,4 +90,15 @@ interface PestInvesAPI {
 
     @PUT("/disableturnright/")
     fun disableTurnright(): Call<Status>
+
+    companion object {
+        fun createClient(): PestInvesAPI {
+            val pestInvest: PestInvesAPI = Retrofit.Builder()
+                .baseUrl("http://192.168.125.187:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(PestInvesAPI::class.java)
+            return pestInvest
+        }
+    }
 }

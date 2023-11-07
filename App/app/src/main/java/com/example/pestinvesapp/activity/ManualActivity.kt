@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ManualActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityManualBinding
+    val createClient = PestInvesAPI.createClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +28,7 @@ class ManualActivity : AppCompatActivity() {
         binding = ActivityManualBinding.inflate(layoutInflater)
 
         binding.btnForward.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.enableForward()
+            createClient.enableForward()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         if(response.isSuccessful){
@@ -53,12 +49,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnSforward.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.disableForward()
+            createClient.disableForward()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         if(response.isSuccessful){
@@ -81,12 +72,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnBackward.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.enableBackward()
+            createClient.enableBackward()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = false
@@ -105,12 +91,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnSbackward.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.disableBackward()
+            createClient.disableBackward()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = true
@@ -131,12 +112,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnTurnleft.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.enableTurnleft()
+            createClient.enableTurnleft()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = false
@@ -155,12 +131,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnSturnleft.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.disableTurnleft()
+            createClient.disableTurnleft()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = true
@@ -181,12 +152,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnTurnright.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.enableTurnright()
+            createClient.enableTurnright()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = false
@@ -205,12 +171,7 @@ class ManualActivity : AppCompatActivity() {
         }
 
         binding.btnSturnright.setOnClickListener {
-            val api : PestInvesAPI = Retrofit.Builder()
-                .baseUrl("http://192.168.43.187:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(PestInvesAPI::class.java)
-            api.disableTurnright()
+            createClient.disableTurnright()
                 .enqueue(object : Callback<Status> {
                     override fun onResponse(call: Call<Status>, response: Response<Status>) {
                         binding.btnForward.isVisible = true
@@ -246,12 +207,7 @@ class ManualActivity : AppCompatActivity() {
 
         when(item?.itemId) {
             R.id.automaticMode -> {
-                val api: PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://192.168.43.187:3000/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(PestInvesAPI::class.java)
-                api.changeToAutomatic()
+                createClient.changeToAutomatic()
                     .enqueue(object : Callback<Status> {
                         override fun onResponse(call: Call<Status>, response: Response<Status>) {
                             if(response.isSuccessful) {
@@ -265,6 +221,11 @@ class ManualActivity : AppCompatActivity() {
                         }
 
                     })
+            }
+
+            R.id.stramingMode -> {
+                val streamingMode = Intent(this@ManualActivity, StreamingActivity::class.java)
+                startActivity(streamingMode)
             }
         }
 

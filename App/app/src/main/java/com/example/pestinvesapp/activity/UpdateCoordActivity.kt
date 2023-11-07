@@ -27,6 +27,7 @@ class UpdateCoordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUpdateCoordBinding
     private var currentPoint: GeoPoint? = null
+    val createClient = PestInvesAPI.createClient()
     val markerList = mutableListOf<Marker>()
 
     @SuppressLint("ClickableViewAccessibility")
@@ -61,12 +62,7 @@ class UpdateCoordActivity : AppCompatActivity() {
             val coordId = data?.get("coordId")
             if(currentPoint != null) {
                 if(hasLocationPermission()) {
-                    val api: PestInvesAPI = Retrofit.Builder()
-                        .baseUrl("http://192.168.43.187:3000/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-                        .create(PestInvesAPI::class.java)
-                    api.updateCoord(
+                    createClient.updateCoord(
                         coordId.toString().toInt(),
                         currentPoint?.latitude.toString().toDouble(),
                         currentPoint?.longitude.toString().toDouble()
@@ -157,12 +153,7 @@ class UpdateCoordActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val data = intent.extras
                 val coordId = data?.get("coordId")
-                val api: PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://192.168.43.187:3000/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(PestInvesAPI::class.java)
-                api.updateCoord(
+                createClient.updateCoord(
                     coordId.toString().toInt(),
                     currentPoint?.latitude.toString().toDouble(),
                     currentPoint?.longitude.toString().toDouble()

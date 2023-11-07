@@ -39,12 +39,8 @@ class MissionAdapter(val missionList: ArrayList<Mission>, val context: Context):
                 binding.btnDeleteMission.setOnClickListener {
                     val item = missionList[adapterPosition]
                     val contextView: Context = view.context
-                    val api : PestInvesAPI = Retrofit.Builder()
-                        .baseUrl("http://192.168.43.187:3000/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-                        .create(PestInvesAPI::class.java)
-                    api.deleteMission(
+                    val createClient = PestInvesAPI.createClient()
+                    createClient.deleteMission(
                         item.idMission.toString().toInt()
                     ).enqueue(object : Callback<Mission> {
                         override fun onResponse(call: Call<Mission>, response: Response<Mission>) {

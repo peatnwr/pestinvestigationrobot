@@ -25,6 +25,7 @@ import java.time.LocalDate
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    val createClient = PestInvesAPI.createClient()
     var missionList = arrayListOf<Mission>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,12 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         when(item?.itemId) {
             R.id.manualMode -> {
-                val api : PestInvesAPI = Retrofit.Builder()
-                    .baseUrl("http://192.168.43.187:3000/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(PestInvesAPI::class.java)
-                api.changeToManual()
+                createClient.changeToManual()
                     .enqueue(object : Callback<Status> {
                         override fun onResponse(call: Call<Status>, response: Response<Status>) {
                             if(response.isSuccessful){
@@ -84,6 +80,11 @@ class MainActivity : AppCompatActivity() {
                         }
                     })
             }
+
+            R.id.stramingMode -> {
+                val streamingMode = Intent(this@MainActivity, StreamingActivity::class.java)
+                startActivity(streamingMode)
+            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -91,13 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDateData() {
         missionList.clear()
-        val api : PestInvesAPI = Retrofit.Builder()
-            .baseUrl("http://192.168.43.187:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(PestInvesAPI::class.java)
-
-        api.receiveAllDate()
+        createClient.receiveAllDate()
             .enqueue(object : Callback<List<Mission>> {
                 override fun onResponse(call: Call<List<Mission>>, response: Response<List<Mission>>) {
                     response.body()?.forEach {
